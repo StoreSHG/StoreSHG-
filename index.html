@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bagi THR Ramadan</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0fdf4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 8px solid #16a34a;
+        }
+        h1 { color: #15803d; margin-bottom: 10px; font-size: 24px; }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .dana-no {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0ea5e9;
+            display: block;
+            margin: 5px 0 15px 0;
+        }
+        .btn {
+            display: block;
+            background: #16a34a;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            border: none;
+            font-size: 15px;
+        }
+        .btn-download {
+            background: #1e293b;
+            margin-top: 10px;
+        }
+        .qris-img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        /* Input tersembunyi untuk bantuan copy */
+        #tempInput { position: absolute; left: -9999px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌙 THR Berkah By:StoreSHG</h1>
+    <p style="margin-bottom: 15px;">Selamat Hari Raya Idul Fitri teman-teman tuli.
+Mohon maaf lahir dan batin.
+Semoga kita semua sehat dan bahagia🤟🏻🙏. </p>
+
+    <div class="card">
+        <p>Nomor DANA/OVO/SHOPEEPAY/GOPAY:</p>
+        <span class="dana-no" id="targetNo">085960486152</span>
+        <button class="btn" onclick="copyAction()">Salin Nomor</button>
+    </div>
+
+    <div class="card">
+        <p>Atau Scan QRIS:</p>
+        <img src="https://files.catbox.moe/biz9xo.jpg" alt="QRIS" class="qris-img">
+        <a href="https://files.catbox.moe/biz9xo.jpg" download="QRIS_THR.jpg" class="btn btn-download">
+            📥 Download QRIS
+        </a>
+    </div>
+
+    <input type="text" id="tempInput" value="085960486152">
+</div>
+
+<script>
+    function copyAction() {
+        const temp = document.getElementById("tempInput");
+        
+        // Pilih teksnya
+        temp.select();
+        temp.setSelectionRange(0, 99999); // Untuk HP
+
+        try {
+            // Cara lama tapi paling ampuh di browser HP (execCommand)
+            document.execCommand("copy");
+            alert("✅ Nomor DANA berhasil disalin!");
+        } catch (err) {
+            // Jika cara di atas gagal, coba Navigator API
+            navigator.clipboard.writeText("085960486152").then(() => {
+                alert("✅ Nomor DANA berhasil disalin!");
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
