@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bagi THR Ramadan</title>
     <style>
-        /* CSS tetap sama seperti sebelumnya */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0fdf4; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         .container { background: white; width: 100%; max-width: 380px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; border-top: 8px solid #16a34a; }
-        h1 { color: #15803d; margin-bottom: 10px; font-size: 24px; }
+        h1 { color: #15803d; margin-bottom: 10px; font-size: 22px; }
         .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 15px; padding: 15px; margin-bottom: 15px; }
         .dana-no { font-size: 24px; font-weight: bold; color: #0ea5e9; display: block; margin: 5px 0 15px 0; }
         .btn { display: block; background: #16a34a; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; cursor: pointer; width: 100%; border: none; font-size: 15px; }
@@ -22,20 +21,20 @@
 
 <div class="container">
     <h1>🌙 THR Berkah By:StoreSHG</h1>
-    <p style="margin-bottom: 15px;">Selamat Hari Raya Idul Fitri teman-teman tuli.
-Mohon maaf lahir dan batin.
-Semoga kita semua sehat dan bahagia🤟🏻🙏</p>
+    <p style="margin-bottom: 15px; font-size: 14px; color: #4b5563;">
+        Selamat Hari Raya Idul Fitri teman-teman tuli.<br>
+        Mohon maaf lahir dan batin.🤟🏻🙏
+    </p>
 
     <div class="card">
-        <p>Nomor DANA/OVO/GOPAY/SHOPEEPAY:</p>
+        <p style="font-size: 14px;">Salin Nomor Dana/Ovo/Gopay:</p>
         <span class="dana-no">085960486152</span>
         <button class="btn" onclick="copyAction()">Salin Nomor</button>
     </div>
 
     <div class="card">
-        <p>Atau Scan QRIS:</p>
+        <p style="font-size: 14px;">Atau Scan QRIS:</p>
         <img src="https://files.catbox.moe/biz9xo.jpg" alt="QRIS" class="qris-img">
-        
         <button onclick="downloadQRIS()" class="btn btn-download">
             📥 Download QRIS ke Galeri
         </button>
@@ -45,36 +44,35 @@ Semoga kita semua sehat dan bahagia🤟🏻🙏</p>
 </div>
 
 <script>
-    // Fungsi Salin Nomor
     function copyAction() {
         const temp = document.getElementById("tempInput");
         temp.select();
         temp.setSelectionRange(0, 99999);
-        document.execCommand("copy");
-        alert("✅ Nomor berhasil disalin!");
+        try {
+            document.execCommand("copy");
+            alert("✅ Nomor berhasil disalin!");
+        } catch (err) {
+            navigator.clipboard.writeText("085960486152");
+            alert("✅ Nomor berhasil disalin!");
+        }
     }
 
-    // Fungsi Download Gambar ke Galeri
     async function downloadQRIS() {
         const imgUrl = "https://files.catbox.moe/biz9xo.jpg";
-        
         try {
             const response = await fetch(imgUrl);
             const blob = await response.blob();
-            const blobUrl = window.URL.createObjectURL(blob);
-            
+            const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = 'QRIS_THR_StoreSHG.jpg';
+            a.href = url;
+            a.download = 'QRIS_StoreSHG.jpg';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            window.URL.revokeObjectURL(blobUrl);
-            
-            alert("✅ Berhasil! Silakan cek Galeri atau folder Download kamu.");
+            window.URL.revokeObjectURL(url);
+            alert("✅ Sedang mengunduh... Cek galeri kamu!");
         } catch (err) {
-            // Jika ada masalah CORS atau jaringan, arahkan ke cara manual
-            alert("Gagal download otomatis. Silakan tekan lama pada gambar lalu pilih 'Simpan Gambar'.");
+            alert("Gagal otomatis. Tekan lama pada gambar lalu pilih 'Simpan Gambar'.");
             window.open(imgUrl, '_blank');
         }
     }
